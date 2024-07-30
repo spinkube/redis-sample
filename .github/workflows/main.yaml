@@ -38,4 +38,4 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: push package
-        run: RELEASE_VERSION=$(yq '.application.version' spin.toml) && spin registy push ghcr.io/${{ github.repository }}:$RELEASE_VERSION
+        run: RELEASE_VERSION=$(yq '.application.version' spin.toml) && spin registry push ghcr.io/${{ github.repository }}:$RELEASE_VERSION

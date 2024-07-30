@@ -1,6 +1,6 @@
 # Overview
 
-This is an OCI-compliant package that can be used to demonstrate how a Spin app can be used to interact with Redis in a Kubernetes cluster.
+This is an OCI-compliant package that can be used to demonstrate how a Spin app interacts with Redis in a Kubernetes cluster.
 
 # Usage
 
