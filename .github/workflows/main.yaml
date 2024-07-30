@@ -27,33 +27,6 @@ jobs:
         with:
           version: "v0.32.0"
       
-      - name: cofiguring rust toolchain version
-        run: rustup toolchain install stable --profile minimal
-
-      - name: cache cargo registry and git index
-        id: cache-cargo-registry
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('install-script.sh') }}
-          restore-keys: |
-            ${{ runner.os }}-cargo-registry-
-
-      - name: cache cargo binaries
-        id: cache-cargo-bin
-        uses: actions/cache@v3
-        with:
-          path: ~/.cargo/bin
-          key: ${{ runner.os }}-cargo-bin-${{ hashFiles('install-script.sh') }}
-          restore-keys: |
-            ${{ runner.os }}-cargo-bin-
-
-      - name: install wkg
-        run: cargo install --git https://github.com/bytecodealliance/wasm-pkg-tools wkg --locked --config net.git-fetch-with-cli=true --force
-        if: steps.cache-cargo-bin.outputs.cache-hit != 'true'
-      
       - name: build spinapp
         run: spin build
       
@@ -65,4 +38,4 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: push package
-        run: RELEASE_VERSION=$(yq '.application.version' spin.toml) && wkg oci push ghcr.io/spinkube/redis-sample:$RELEASE_VERSION main.wasm
+        run: RELEASE_VERSION=$(yq '.application.version' spin.toml) && spin registy push ghcr.io/${{ github.repository }}:$RELEASE_VERSION
