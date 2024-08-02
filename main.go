@@ -36,7 +36,7 @@ func init() {
 		if r.Method == "GET" {
 			value, err := rdb.Get(reqKey)
 			if err != nil {
-				http.Error(w, fmt.Sprintf("no value found for key '%s'", reqKey), http.StatusBadRequest)
+				http.Error(w, fmt.Sprintf("no value found for key '%s'", reqKey), http.StatusNotFound)
 				return
 			}
 
@@ -70,7 +70,7 @@ func init() {
 			return
 
 		} else {
-			http.Error(w, fmt.Sprintf("method %v is not supported, so please try again using 'GET' or 'PUT' for the HTTP method", r.Method), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("method %q is not supported, so please try again using 'GET' or 'PUT' for the HTTP method", r.Method), http.StatusBadRequest)
 			return
 		}
 	})

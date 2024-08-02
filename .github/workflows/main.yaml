@@ -38,5 +38,4 @@ jobs:
       - name: push package
         run: |
           RELEASE_VERSION=$(date +%Y%m%d-%H%M%S)-g$(git rev-parse --short HEAD) && \
-          spin registry push ghcr.io/${{ github.owner }}/${{ github.repository }}:$RELEASE_VERSION && \
-          spin registry push ghcr.io/${{ github.owner }}/${{ github.repository }}:latest
+          spin registry push ghcr.io/${{ github.owner }}/${{ github.repository }}:$RELEASE_VERSION
